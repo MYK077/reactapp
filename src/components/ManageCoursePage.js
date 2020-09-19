@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CourseForm from "./CourseForm";
 import * as courseApi from "../api/courseApi";
 import { toast } from "react-toastify";
@@ -13,6 +13,15 @@ const ManageCoursePage = (props) => {
     category: "",
   });
 
+  useEffect(
+    () => {
+      const slug = props.match.params.slug; //from path: /course/:slug
+      if (slug) {
+        courseApi.getCourseBySlug(slug).then((_course) => setCourse(_course));
+      }
+    },
+    [props.match.params.slug] //if this value inside dependency array changes use effect should rerun
+  );
   function formIsValid() {
     const _errors = {};
 
