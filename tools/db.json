@@ -72,19 +72,19 @@
     },
     {
       "id": 11,
-      "slug": "full-stack-developer",
-      "title": "Full Stack Developer",
+      "slug": "python-developer",
+      "title": "python developer",
       "authorId": 1,
       "category": "Software Development",
-      "createdAt": 1600622525992
+      "createdAt": 1600641166778
     },
     {
       "id": 12,
-      "slug": "software-engineer",
-      "title": "Software Engineer",
-      "authorId": 2,
+      "slug": "python-developer",
+      "title": "python developer",
+      "authorId": 1,
       "category": "Software Development",
-      "createdAt": 1600623762543
+      "createdAt": 1600641252311
     }
   ],
   "authors": [

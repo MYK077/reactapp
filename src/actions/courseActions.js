@@ -11,3 +11,13 @@ export function saveCourse(course) {
     });
   });
 }
+
+export function loadCourses() {
+  return courseApi.getCourses().then((courses) => {
+    //   dispatcher.dispatch() will notify the stores that a course was created
+    dispatcher.dispatch({
+      actionType: actionTypes.LOAD_COURSES,
+      courses: courses,
+    });
+  });
+}
