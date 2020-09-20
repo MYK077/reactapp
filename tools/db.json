@@ -76,15 +76,15 @@
       "title": "Full Stack Developer",
       "authorId": 1,
       "category": "Software Development",
-      "createdAt": 1600315494955
+      "createdAt": 1600622525992
     },
     {
       "id": 12,
-      "slug": "full-stack-developer",
-      "title": "Full Stack Developer",
-      "authorId": 1,
+      "slug": "software-engineer",
+      "title": "Software Engineer",
+      "authorId": 2,
       "category": "Software Development",
-      "createdAt": 1600318592368
+      "createdAt": 1600623762543
     }
   ],
   "authors": [
