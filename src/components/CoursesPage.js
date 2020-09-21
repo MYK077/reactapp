@@ -3,16 +3,16 @@ import React, { useState, useEffect } from "react";
 import CourseList from "./CourseList";
 import { Link } from "react-router-dom";
 import courseStore from "../stores/courseStore";
-import { loadCourses } from "../actions/courseActions";
+import { loadCourses, deleteCourse } from "../actions/courseActions";
 
 function CoursesPage() {
   const [courses, setCourses] = useState(courseStore.getCourses());
 
   useEffect(() => {
     courseStore.addChangeListener(onChange);
-    if (courseStore.getCourses().length === 0) loadCourses();
+    if (courses.length === 0) loadCourses();
     return () => courseStore.removeChangeListener(onChange);
-  }, []);
+  }, [courses.length]);
 
   /* since our component is connected to flux store, when courses are added 
   to the store onChange will be called */
@@ -26,7 +26,7 @@ function CoursesPage() {
       <Link className="btn btn-primary" to="/course">
         Add Course
       </Link>
-      <CourseList courses={courses} />
+      <CourseList courses={courses} deleteCourse={deleteCourse} />
     </>
   );
 }
