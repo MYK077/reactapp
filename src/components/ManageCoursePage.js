@@ -4,10 +4,15 @@ import CourseForm from "./CourseForm";
 import courseStore from "../stores/courseStore";
 import { toast } from "react-toastify";
 import * as courseActions from "../actions/courseActions";
+import NotFoundPage from "./NotFoundPage";
 
 const ManageCoursePage = (props) => {
   const [errors, setErrors] = useState({});
+
   const [courses, setCourses] = useState(courseStore.getCourses());
+
+  const [validSlug, setValidSlug] = useState(false);
+
   const [course, setCourse] = useState({
     id: null,
     slug: "",
@@ -22,7 +27,11 @@ const ManageCoursePage = (props) => {
     if (courses.length === 0) {
       courseActions.loadCourses();
     } else if (slug) {
-      setCourse(courseStore.getCourseBySlug(slug));
+      const courseBySlug = courseStore.getCourseBySlug(slug);
+      if (courseBySlug) {
+        setCourse(courseBySlug);
+        setValidSlug(true);
+      }
     }
     return () => courseStore.removeChangeListener(onChange);
   }, [courses.length, props.match.params.slug]);
@@ -60,7 +69,9 @@ const ManageCoursePage = (props) => {
     });
   }
 
-  return (
+  return props.match.params.slug && !validSlug ? (
+    <NotFoundPage />
+  ) : (
     <>
       <h2>Manage Course</h2>
       <CourseForm
