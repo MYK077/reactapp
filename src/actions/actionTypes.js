@@ -3,6 +3,7 @@ const actionTypes = {
   UPDATE_COURSE: "UPDATE_COURSE",
   DELETE_COURSE: "DELETE_COURSE",
   LOAD_COURSES: "LOAD_COURSES",
+  LOAD_AUTHORS: "LOAD_AUTHORS",
 };
 
 export default actionTypes;
