@@ -7,6 +7,8 @@ function NotFoundPage() {
       <h2>Page not found</h2>
       <p>
         <Link to="/">Back to Home</Link>
+        <br></br>
+        <Link to="/courses"> Courses</Link>
       </p>
     </div>
   );
