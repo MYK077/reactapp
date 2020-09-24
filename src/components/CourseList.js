@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import authorStore from "../stores/authorStore";
 
 function CourseList(props) {
   return (
@@ -30,7 +31,8 @@ function CourseList(props) {
                 <Link to={"/course/" + course.slug}>{course.title}</Link>
               </td>
               <td>{course.authorId}</td>
-              <td>{}</td>
+
+              <td>{authorStore.getAuthorById(course.authorId).name}</td>
               <td>{course.category}</td>
             </tr>
           );

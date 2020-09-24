@@ -4,10 +4,21 @@ import CourseList from "./CourseList";
 import { Link } from "react-router-dom";
 import courseStore from "../stores/courseStore";
 import { loadCourses, deleteCourse } from "../actions/courseActions";
+import { loadAuthors } from "../actions/authorActions";
+import authorStore from "../stores/authorStore";
 
 function CoursesPage() {
   const [courses, setCourses] = useState(courseStore.getCourses());
+  const [authors, setAuthors] = useState(authorStore.getAuthors());
 
+  // for Authors
+  useEffect(() => {
+    authorStore.addChangeListener(onChangeAuthors);
+    if (authors.length === 0) loadAuthors();
+    return () => authorStore.removeChangeListener(onChangeAuthors);
+  }, [authors.length]);
+
+  // for Courses
   useEffect(() => {
     courseStore.addChangeListener(onChange);
     if (courses.length === 0) loadCourses();
@@ -20,13 +31,21 @@ function CoursesPage() {
     setCourses(courseStore.getCourses());
   }
 
+  function onChangeAuthors() {
+    setAuthors(authorStore.getAuthors());
+  }
+
   return (
     <>
       <h2>Courses</h2>
       <Link className="btn btn-primary" to="/course">
         Add Course
       </Link>
-      <CourseList courses={courses} deleteCourse={deleteCourse} />
+      <CourseList
+        courses={courses}
+        authors={authors}
+        deleteCourse={deleteCourse}
+      />
     </>
   );
 }

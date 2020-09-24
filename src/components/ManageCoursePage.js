@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import CourseForm from "./CourseForm";
 // import * as courseApi from "../api/courseApi";
 import courseStore from "../stores/courseStore";
+import authorStore from "../stores/authorStore";
 import { toast } from "react-toastify";
 import * as courseActions from "../actions/courseActions";
+import * as authorActions from "../actions/authorActions";
 import NotFoundPage from "./NotFoundPage";
 
 const ManageCoursePage = (props) => {
   const [errors, setErrors] = useState({});
 
   const [courses, setCourses] = useState(courseStore.getCourses());
+
+  const [authors, setAuthors] = useState(authorStore.getAuthors());
 
   const [validSlug, setValidSlug] = useState(false);
 
@@ -36,8 +40,20 @@ const ManageCoursePage = (props) => {
     return () => courseStore.removeChangeListener(onChange);
   }, [courses.length, props.match.params.slug]);
 
+  useEffect(() => {
+    authorStore.addChangeListener(onChangeAuthors);
+    if (authors.length === 0) {
+      authorActions.loadAuthors();
+    }
+    return () => authorStore.removeChangeListener(onChange);
+  }, [authors.length]);
+
   function onChange() {
     setCourses(courseStore.getCourses());
+  }
+
+  function onChangeAuthors() {
+    setAuthors(authorStore.getAuthors());
   }
 
   function formIsValid() {
@@ -77,6 +93,7 @@ const ManageCoursePage = (props) => {
       <CourseForm
         errors={errors}
         course={course}
+        authors={authors}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
