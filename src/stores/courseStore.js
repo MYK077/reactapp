@@ -46,7 +46,7 @@ Dispatcher.register((action) => {
 
     case actionTypes.DELETE_COURSE:
       _courses = _courses.filter(
-        (course) => course !== parseInt(action.id, 10)
+        (course) => course.id !== parseInt(action.id, 10)
       );
       store.emitChange();
       break;
