@@ -6,6 +6,7 @@ import courseStore from "../stores/courseStore";
 import { loadCourses, deleteCourse } from "../actions/courseActions";
 import { loadAuthors } from "../actions/authorActions";
 import authorStore from "../stores/authorStore";
+import ReactPaginate from "react-paginate";
 
 function CoursesPage() {
   const [courses, setCourses] = useState(courseStore.getCourses());
@@ -45,6 +46,19 @@ function CoursesPage() {
         courses={courses}
         authors={authors}
         deleteCourse={deleteCourse}
+      />
+      <ReactPaginate
+        previousLabel={"previous"}
+        nextLabel={"next"}
+        breakLabel={"..."}
+        breakClassName={"break-me"}
+        pageCount={10}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        // onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
       />
     </>
   );
